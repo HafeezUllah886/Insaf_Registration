@@ -169,7 +169,10 @@
                                         <div class="col-md-4 mt-2">
                                             <div class="form-group">
                                                 <label for="photo">Passport Size Image</label>
-                                                <input type="file" id="photo" name="photo" class="form-control" accept="image/*">
+                                                <input type="file" id="photo" required name="photo" class="form-control" accept="image/*">
+                                                @error('photo')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4 mt-2">
@@ -181,7 +184,10 @@
                                         <div class="col-md-4 mt-2">
                                             <div class="form-group">
                                                 <label for="cnicF">CNIC Front</label>
-                                                <input type="file" id="cnicF" name="cnicF" class="form-control" accept="image/*">
+                                                <input type="file" id="cnicF" required name="cnicF" class="form-control" accept="image/*">
+                                                @error('cnicF')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4 mt-2">
@@ -193,7 +199,10 @@
                                         <div class="col-md-4 mt-2">
                                             <div class="form-group">
                                                 <label for="cnicB">CNIC Back</label>
-                                                <input type="file" id="cnicB" name="cnicB" class="form-control" accept="image/*">
+                                                <input type="file" id="cnicB" required name="cnicB" class="form-control" accept="image/*">
+                                                @error('cnicB')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4 mt-2">
@@ -206,6 +215,9 @@
                                             <div class="form-group">
                                                 <label for="bCard">Bar Council Card (Front)</label>
                                                 <input type="file" id="bCard" name="bCard" class="form-control" accept="image/*">
+                                                @error('bCard')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4 mt-2">
@@ -218,6 +230,9 @@
                                             <div class="form-group">
                                                 <label for="bCard">Bar Council Card (Back)</label>
                                                 <input type="file" id="bCardB" name="bCardB" class="form-control" accept="image/*">
+                                                @error('bCardB')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4 mt-2">
@@ -226,7 +241,7 @@
                                         <div class="col-md-4 mt-2">
                                             * Must be a clear/readable image
                                         </div>
-                                        <div class="col-md-4 mt-2">
+                                        {{-- <div class="col-md-4 mt-2">
                                             <div class="form-group">
                                                 <label for="license">Licenses</label>
                                                 <input type="file" id="license" name="license" class="form-control" accept=".pdf">
@@ -238,7 +253,7 @@
                                         </div>
                                         <div class="col-md-4 mt-2">
                                             * Upload a PDF file. If you want to upload more than one license, combine all the license documents into a single PDF
-                                        </div>
+                                        </div> --}}
 
                                     </div>
                                     <div class="row mt-2">

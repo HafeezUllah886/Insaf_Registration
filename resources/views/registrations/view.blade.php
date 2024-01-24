@@ -37,7 +37,6 @@
                         <h3 class="mt-3">{{ $reg->name }}</h3>
                         <p class="btn btn-default" data-bs-toggle="modal" data-bs-target="#cnic">View CNIC</p>
                         <p class="btn btn-default" data-bs-toggle="modal" data-bs-target="#bCard">View Bar Council Card</p>
-                        <p class="btn btn-default"  data-bs-toggle="modal" data-bs-target="#licenses">View Licenses</p>
                     </div>
                     <div class="col-md-9 table-responsive">
                         <table class="table" width="100%">
@@ -172,8 +171,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+            @if($reg->cnicF)
                 <img src="{{ asset($reg->cnicF) }}" class="w-100" alt="">
+            @else
+            <span class="text-danger">Image not uploaded</span><br>
+            @endif
+                @if ($reg->cnicB)
                 <img src="{{ asset($reg->cnicB) }}" class="w-100" alt="">
+                @else
+                <span class="text-danger">Image not uploaded</span>
+                @endif
+
             </div>
         </div>
     </div>
@@ -186,25 +194,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                @if ($reg->bCard)
                 <img src="{{ asset($reg->bCard) }}" class="w-100" alt="">
+                @else
+                <span class="text-danger">Image not uploaded</span><br>
+                @endif
+                @if ($reg->bCardB)
                 <img src="{{ asset($reg->bCardB) }}" class="w-100" alt="">
+                @else
+                <span class="text-danger">Image not uploaded</span>
+                @endif
+
+
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="licenses" tabindex="-1" aria-labelledby="addPaymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg"> <!-- Add "modal-dialog-white" class -->
-        <div class="modal-content" style="background-color: white; color: #000000"> <!-- Add "modal-content-white" class -->
-            <div class="modal-header">
-                <h5 class="modal-title" id="addPaymentModalLabel" style="color: black; font-weight: bold">Licenses View</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-               <embed src="{{ asset($reg->licenses) }}" class="w-100" style="min-height: 100vh"  type="text/pdf">
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- CONTENT AREA -->
 
 @endsection

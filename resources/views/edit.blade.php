@@ -208,14 +208,14 @@
                                                 * Must be a clear/readable image
                                             </div>
                                         </div>
-                                        <div class="col-md-4 mt-2">
+                                        {{-- <div class="col-md-4 mt-2">
                                             <embed id="licensePreview" src="{{asset($reg->licenses)}}" alt="Image Preview" style="width: 300px; height: 200px;">
                                             <div class="form-group">
                                                 <label for="license">Licenses</label>
                                                 <input type="file" id="license" name="license" class="form-control" accept=".pdf">
                                                 * Upload a PDF file. If you want to upload more than one license, combine all the license documents into a single PDF
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-md-9">

@@ -17,6 +17,15 @@ class RegistrationController extends Controller
 
     public function store(request $req)
     {
+        $req->validate(
+            [
+                'photo' => 'required|image|mimes:jpeg,jpg,png|max:3072',
+                'cnicF' => 'required|image|mimes:jpeg,jpg,png|max:3072',
+                'cnicB' => 'required|image|mimes:jpeg,jpg,png|max:3072',
+                'bCard' => 'image|mimes:jpeg,jpg,png|max:3072',
+                'bCardB' => 'image|mimes:jpeg,jpg,png|max:3072',
+            ]
+            );
         $check = registration::where("cnic", $req->cnic)->count();
         if($check > 0)
         {
@@ -73,15 +82,6 @@ class RegistrationController extends Controller
             $img->save($image_path,100);
         }
         $license_path1 = null;
-        if ($req->hasFile('license')) {
-            $pdf = $req->file('license');
-            $filename = $req->cnic . "." . $pdf->getClientOriginalExtension(); // Use the extension of the uploaded PDF
-            $pdf_path = public_path('/files/license/' . $filename);
-            $license_path1 = '/files/license/' . $filename;
-
-            // Instead of using an image manipulation library, move the PDF file to the specified location.
-            $pdf->move(public_path('/files/license/'), $filename);
-        }
         $reg = registration::create(
             [
                 'name' => $req->name,
@@ -226,32 +226,32 @@ class RegistrationController extends Controller
 
         $photo = public_path($reg->photo);
         if (file_exists($photo)) {
-            unlink($photo);
+            @unlink($photo);
         }
 
         $cnicF = public_path($reg->cnicF);
         if (file_exists($cnicF)) {
-            unlink($cnicF);
+            @unlink($cnicF);
         }
 
         $cnicB = public_path($reg->cnicB);
         if (file_exists($cnicB)) {
-            unlink($cnicB);
+            @unlink($cnicB);
         }
 
         $bCard = public_path($reg->bCard);
         if (file_exists($bCard)) {
-            unlink($bCard);
+            @unlink($bCard);
         }
 
         $bCardB = public_path($reg->bCardB);
         if (file_exists($bCardB)) {
-            unlink($bCardB);
+            @unlink($bCardB);
         }
 
         $licenses = public_path($reg->licenses);
         if (file_exists($licenses)) {
-            unlink($licenses);
+            @unlink($licenses);
         }
 
         registration::find($id)->delete();
