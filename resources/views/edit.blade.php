@@ -260,7 +260,11 @@
     <script src="{{ asset('assets/src/plugins/src/jquery-ui/jquery.min.js') }}"></script>
     <script src="{{asset('assets/src/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{ asset('assets/src/plugins/src/notification/snackbar/snackbar.min.js') }}"></script>
-
+    <script src="{{ asset('assets/src/plugins/src/input-mask/jquery.inputmask.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/src/plugins/src/input-mask/input-mask.js') }}"></script>
+    <script>
+            $('#cnic').inputmask("9999999999999",{ "clearIncomplete": true });
+    </script>
 
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 

@@ -76,8 +76,8 @@
                                     <div class="row mt-2">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="cnic">CNIC Number (Without Dashes)</label>
-                                                <input type="text" class="form-control" required maxlength="13" id="cnic" name="cnic">
+                                                <label for="cnic">CNIC Number</label>
+                                                <input type="text" class="form-control" required id="cnic" name="cnic">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -300,7 +300,11 @@
     <script src="{{asset('assets/src/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{ asset('assets/src/plugins/src/notification/snackbar/snackbar.min.js') }}"></script>
 
-
+    <script src="{{ asset('assets/src/plugins/src/input-mask/jquery.inputmask.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/src/plugins/src/input-mask/input-mask.js') }}"></script>
+    <script>
+            $('#cnic').inputmask("9999999999999",{ "clearIncomplete": true });
+    </script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
     @if(Session::get('msg'))
