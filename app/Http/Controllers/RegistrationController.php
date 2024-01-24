@@ -304,6 +304,8 @@ class RegistrationController extends Controller
         $reg->email = $req->email;
         $reg->addr = $req->addr;
         $photo_path1 = null;
+
+        $rand = rand('111111','999999');
         if($req->hasFile('photo')){
             $photo = public_path($reg->photo);
             if (file_exists($photo)) {
@@ -311,7 +313,7 @@ class RegistrationController extends Controller
             }
 
             $image = $req->file('photo');
-            $filename = $req->cnic.".".$image->getClientOriginalExtension();
+            $filename = $req->cnic.$rand.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/photos/'.$filename);
             $photo_path1 = '/files/photos/'.$filename;
             $img = Image::make($image);
@@ -325,7 +327,7 @@ class RegistrationController extends Controller
                 unlink($cnicF);
             }
             $image = $req->file('cnicF');
-            $filename = $req->cnic.".".$image->getClientOriginalExtension();
+            $filename = $req->cnic.$rand.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/cnicF/'.$filename);
             $cnicF_path1 = '/files/cnicF/'.$filename;
             $img = Image::make($image);
@@ -339,7 +341,7 @@ class RegistrationController extends Controller
                 unlink($cnicB);
             }
             $image = $req->file('cnicB');
-            $filename = $req->cnic.".".$image->getClientOriginalExtension();
+            $filename = $req->cnic.$rand.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/cnicB/'.$filename);
             $cnicB_path1 = '/files/cnicB/'.$filename;
             $img = Image::make($image);
@@ -353,7 +355,7 @@ class RegistrationController extends Controller
                 unlink($bCard);
             }
             $image = $req->file('bCard');
-            $filename = $req->cnic.".".$image->getClientOriginalExtension();
+            $filename = $req->cnic.$rand.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/bCard/'.$filename);
             $bCard_path1 = '/files/bCard/'.$filename;
             $img = Image::make($image);
@@ -368,7 +370,7 @@ class RegistrationController extends Controller
                 unlink($bCardB);
             }
             $image = $req->file('bCardB');
-            $filename = $req->cnic.".".$image->getClientOriginalExtension();
+            $filename = $req->cnic.$rand.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/bCardB/'.$filename);
             $bCardB_path1 = '/files/bCardB/'.$filename;
             $img = Image::make($image);
@@ -383,7 +385,7 @@ class RegistrationController extends Controller
                 unlink($licenses);
             }
             $pdf = $req->file('license');
-            $filename = $req->cnic . "." . $pdf->getClientOriginalExtension(); // Use the extension of the uploaded PDF
+            $filename = $req->cnic.$rand."." . $pdf->getClientOriginalExtension(); // Use the extension of the uploaded PDF
             $pdf_path = public_path('/files/license/' . $filename);
             $license_path1 = '/files/license/' . $filename;
 
