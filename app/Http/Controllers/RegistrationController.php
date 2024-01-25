@@ -169,7 +169,7 @@ class RegistrationController extends Controller
             $status = $reg->status;
             $tracking = tracking::where("appID", $reg->id)->orderBy('id', 'desc')->first();
             $notes = $reg->notes;
-            $image = "{{asset('')}}".$reg->photo;
+            $image = "{{asset('".$reg->photo."')}}";
         $color = null;
         if($status == "Under Process")
         {
