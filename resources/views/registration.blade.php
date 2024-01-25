@@ -136,7 +136,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="since">Since Member of ILM</label>
+                                                <label for="since">Since Member of ILF</label>
                                                 <input type="date" class="form-control" id="since" name="since">
                                             </div>
                                         </div>

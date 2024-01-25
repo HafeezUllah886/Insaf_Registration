@@ -86,13 +86,10 @@
                                     <div class="col-12"  id="result"></div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="footer-wrapper">
                 <div class="footer-section f-section-1">
                     <p class="">Copyright © <span class="dynamic-year">{{date('Y')}}</span> <a target="_blank" href="#">Diamond Software House</a>, All rights reserved.</p>

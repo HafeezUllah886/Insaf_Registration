@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="since">Since Member of ILM</label>
+                                                <label for="since">Since Member of ILF</label>
                                                 <input type="date" class="form-control" value="{{date("Y-m-d", strtotime($reg->since))}}" id="since" name="since">
                                             </div>
                                         </div>
