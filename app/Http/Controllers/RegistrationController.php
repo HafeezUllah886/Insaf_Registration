@@ -283,6 +283,15 @@ class RegistrationController extends Controller
 
     public function update(request $req)
     {
+        $req->validate(
+            [
+                'photo' => 'image|mimes:jpeg,jpg,png|max:3072',
+                'cnicF' => 'image|mimes:jpeg,jpg,png|max:3072',
+                'cnicB' => 'image|mimes:jpeg,jpg,png|max:3072',
+                'bCard' => 'image|mimes:jpeg,jpg,png|max:3072',
+                'bCardB' => 'image|mimes:jpeg,jpg,png|max:3072',
+            ]
+            );
         $check = registration::where("cnic", $req->cnic)->where('id', "!=", $req->id)->count();
         if($check > 0)
         {
@@ -309,11 +318,11 @@ class RegistrationController extends Controller
         if($req->hasFile('photo')){
             $photo = public_path($reg->photo);
             if (file_exists($photo)) {
-                unlink($photo);
+                @unlink($photo);
             }
 
             $image = $req->file('photo');
-            $filename = $req->cnic.$rand.".".$image->getClientOriginalExtension();
+            $filename = $rand.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/photos/'.$filename);
             $photo_path1 = '/files/photos/'.$filename;
             $img = Image::make($image);
@@ -324,13 +333,13 @@ class RegistrationController extends Controller
         if($req->hasFile('cnicF')){
             $cnicF = public_path($reg->cnicF);
             if (file_exists($cnicF)) {
-                unlink($cnicF);
+                @unlink($cnicF);
             }
-            $image = $req->file('cnicF');
-            $filename = $req->cnic.$rand.".".$image->getClientOriginalExtension();
+            $image1 = $req->file('cnicF');
+            $filename = $rand.".".$image1->getClientOriginalExtension();
             $image_path = public_path('/files/cnicF/'.$filename);
             $cnicF_path1 = '/files/cnicF/'.$filename;
-            $img = Image::make($image);
+            $img = Image::make($image1);
             $img->save($image_path,100);
             $reg->cnicF = $cnicF_path1;
         }
@@ -338,13 +347,13 @@ class RegistrationController extends Controller
         if($req->hasFile('cnicB')){
             $cnicB = public_path($reg->cnicB);
             if (file_exists($cnicB)) {
-                unlink($cnicB);
+                @unlink($cnicB);
             }
-            $image = $req->file('cnicB');
-            $filename = $req->cnic.$rand.".".$image->getClientOriginalExtension();
+            $image2 = $req->file('cnicB');
+            $filename = $rand.".".$image2->getClientOriginalExtension();
             $image_path = public_path('/files/cnicB/'.$filename);
             $cnicB_path1 = '/files/cnicB/'.$filename;
-            $img = Image::make($image);
+            $img = Image::make($image2);
             $img->save($image_path,100);
             $reg->cnicB = $cnicB_path1;
         }
@@ -352,13 +361,13 @@ class RegistrationController extends Controller
         if($req->hasFile('bCard')){
             $bCard = public_path($reg->bCard);
             if (file_exists($bCard)) {
-                unlink($bCard);
+                @unlink($bCard);
             }
-            $image = $req->file('bCard');
-            $filename = $req->cnic.$rand.".".$image->getClientOriginalExtension();
+            $image3 = $req->file('bCard');
+            $filename = $rand.".".$image3->getClientOriginalExtension();
             $image_path = public_path('/files/bCard/'.$filename);
             $bCard_path1 = '/files/bCard/'.$filename;
-            $img = Image::make($image);
+            $img = Image::make($image3);
             $img->save($image_path,100);
             $reg->bCard = $bCard_path1;
         }
@@ -367,32 +376,32 @@ class RegistrationController extends Controller
 
             $bCardB = public_path($reg->bCardB);
             if (file_exists($bCardB)) {
-                unlink($bCardB);
+                @unlink($bCardB);
             }
-            $image = $req->file('bCardB');
-            $filename = $req->cnic.$rand.".".$image->getClientOriginalExtension();
+            $image4 = $req->file('bCardB');
+            $filename = $rand.".".$image4->getClientOriginalExtension();
             $image_path = public_path('/files/bCardB/'.$filename);
             $bCardB_path1 = '/files/bCardB/'.$filename;
-            $img = Image::make($image);
+            $img = Image::make($image4);
             $img->save($image_path,100);
             $reg->bCardB = $bCardB_path1;
         }
-        $license_path1 = null;
-        if ($req->hasFile('license')) {
+        /* $license_path1 = null; */
+        /* if ($req->hasFile('license')) {
 
             $licenses = public_path($reg->licenses);
             if (file_exists($licenses)) {
                 unlink($licenses);
             }
             $pdf = $req->file('license');
-            $filename = $req->cnic.$rand."." . $pdf->getClientOriginalExtension(); // Use the extension of the uploaded PDF
+            $filename = $rand."." . $pdf->getClientOriginalExtension(); // Use the extension of the uploaded PDF
             $pdf_path = public_path('/files/license/' . $filename);
             $license_path1 = '/files/license/' . $filename;
 
             // Instead of using an image manipulation library, move the PDF file to the specified location.
             $pdf->move(public_path('/files/license/'), $filename);
             $reg->licenses = $license_path1;
-        }
+        } */
         $reg->assigned = 2;
         $reg->status = "Pending";
         $reg->notes = "Re-Submitted";

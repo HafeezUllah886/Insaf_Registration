@@ -172,6 +172,9 @@
                                             <div class="form-group">
                                                 <label for="photo">Passport Size Image</label>
                                                 <input type="file" id="photo" name="photo" class="form-control" accept="image/*">
+                                                @error('photo')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                                 * Fresh Photograph with blue background
                                             </div>
                                         </div>
@@ -180,6 +183,9 @@
                                             <div class="form-group">
                                                 <label for="cnicF">CNIC Front</label>
                                                 <input type="file" id="cnicF" name="cnicF" class="form-control" accept="image/*">
+                                                @error('cnicF')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                                 * Must be a clear/readable image
                                             </div>
                                         </div>
@@ -189,6 +195,9 @@
                                             <div class="form-group">
                                                 <label for="cnicB">CNIC Back</label>
                                                 <input type="file" id="cnicB" name="cnicB" class="form-control" accept="image/*">
+                                                @error('cnicB')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                                 * Must be a clear/readable image
                                             </div>
                                         </div>
@@ -197,6 +206,9 @@
                                             <div class="form-group">
                                                 <label for="bCard">Bar Council Card (Front)</label>
                                                 <input type="file" id="bCard" name="bCard" class="form-control" accept="image/*">
+                                                @error('bCard')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                                 * Must be a clear/readable image
                                             </div>
                                         </div>
@@ -205,6 +217,9 @@
                                             <div class="form-group">
                                                 <label for="bCard">Bar Council Card (Back)</label>
                                                 <input type="file" id="bCardB" name="bCardB" class="form-control" accept="image/*">
+                                                @error('bCardB')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
                                                 * Must be a clear/readable image
                                             </div>
                                         </div>
