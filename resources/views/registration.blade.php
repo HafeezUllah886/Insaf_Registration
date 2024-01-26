@@ -68,7 +68,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="fname">Father Name</label>
+                                                <label for="fname">Father / Husband Name</label>
                                                 <input type="text" class="form-control" required id="fname" name="fname">
                                             </div>
                                         </div>
