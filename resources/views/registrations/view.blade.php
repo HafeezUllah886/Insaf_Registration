@@ -49,6 +49,10 @@
                                 <td>{{ $reg->fname }}</td>
                             </tr>
                             <tr>
+                                <td>Occupation</td>
+                                <td>{{ $reg->occupation }}</td>
+                            </tr>
+                            <tr>
                                 <td>CNIC Number</td>
                                 <td>{{ $reg->cnic }}</td>
                             </tr>

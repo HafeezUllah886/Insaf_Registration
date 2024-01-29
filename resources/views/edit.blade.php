@@ -75,13 +75,23 @@
                                         </div>
                                     </div>
                                     <div class="row mt-2">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="occupation">Occupation</label>
+                                                <select class="form-select" required name="occupation" id="occupation">
+                                                    <option value="Advocate" {{$reg->occupation == 'Advocate' ? 'selected' : ''}}>Advocate</option>
+                                                    <option value="Advocate of Supreme Court" {{$reg->occupation == 'Advocate of Supreme Court' ? 'selected' : ''}}>Advocate of Supreme Court</option>
+                                                    <option value="Advocate of High Court" {{$reg->occupation == 'Advocate of High Court' ? 'selected' : ''}}>Advocate of High Court</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="cnic">CNIC Number (Without Dashes)</label>
                                                 <input type="text" class="form-control" required maxlength="13" value="{{$reg->cnic}}" id="cnic" name="cnic">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="gender">Gender</label>
                                                 <select class="form-select" required name="gender" id="gender">

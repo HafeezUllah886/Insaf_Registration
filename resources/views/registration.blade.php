@@ -74,13 +74,23 @@
                                         </div>
                                     </div>
                                     <div class="row mt-2">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="occupation">Occupation</label>
+                                                <select class="form-select" required name="occupation" id="occupation">
+                                                    <option>Advocate</option>
+                                                    <option>Advocate of Supreme Court</option>
+                                                    <option>Advocate of High Court</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="cnic">CNIC Number</label>
                                                 <input type="text" class="form-control" required id="cnic" name="cnic">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="gender">Gender</label>
                                                 <select class="form-select" required name="gender" id="gender">

@@ -38,8 +38,7 @@ class RegistrationController extends Controller
             $filename = $req->cnic.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/photos/'.$filename);
             $photo_path1 = '/files/photos/'.$filename;
-            $img = Image::make($image);
-            $img->save($image_path,100);
+            $image->move(public_path('/files/photos/'), $filename);
         }
         $cnicF_path1 = null;
         if($req->hasFile('cnicF')){
@@ -48,8 +47,7 @@ class RegistrationController extends Controller
             $filename = $req->cnic.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/cnicF/'.$filename);
             $cnicF_path1 = '/files/cnicF/'.$filename;
-            $img = Image::make($image);
-            $img->save($image_path,100);
+            $image->move(public_path('/files/cnicF/'), $filename);
         }
         $cnicB_path1 = null;
         if($req->hasFile('cnicB')){
@@ -58,8 +56,7 @@ class RegistrationController extends Controller
             $filename = $req->cnic.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/cnicB/'.$filename);
             $cnicB_path1 = '/files/cnicB/'.$filename;
-            $img = Image::make($image);
-            $img->save($image_path,100);
+            $image->move(public_path('/files/cnicB/'), $filename);
         }
         $bCard_path1 = null;
         if($req->hasFile('bCard')){
@@ -68,8 +65,7 @@ class RegistrationController extends Controller
             $filename = $req->cnic.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/bCard/'.$filename);
             $bCard_path1 = '/files/bCard/'.$filename;
-            $img = Image::make($image);
-            $img->save($image_path,100);
+            $image->move(public_path('/files/bCard/'), $filename);
         }
         $bCardB_path1 = null;
         if($req->hasFile('bCardB')){
@@ -78,14 +74,14 @@ class RegistrationController extends Controller
             $filename = $req->cnic.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/bCardB/'.$filename);
             $bCardB_path1 = '/files/bCardB/'.$filename;
-            $img = Image::make($image);
-            $img->save($image_path,100);
+            $image->move(public_path('/files/bCardB/'), $filename);
         }
         $license_path1 = null;
         $reg = registration::create(
             [
                 'name' => $req->name,
                 'fname' => $req->fname,
+                'occupation' => $req->occupation,
                 'cnic' => $req->cnic,
                 'gender' => $req->gender,
                 'dist' => $req->dist,
@@ -305,6 +301,7 @@ class RegistrationController extends Controller
         $reg = registration::find($req->id);
         $reg->name = $req->name;
         $reg->fname = $req->fname;
+        $reg->occupation = $req->occupation;
         $reg->cnic = $req->cnic;
         $reg->gender = $req->gender;
         $reg->dist = $req->dist;
@@ -330,8 +327,7 @@ class RegistrationController extends Controller
             $filename = $rand.".".$image->getClientOriginalExtension();
             $image_path = public_path('/files/photos/'.$filename);
             $photo_path1 = '/files/photos/'.$filename;
-            $img = Image::make($image);
-            $img->save($image_path,100);
+            $image->move(public_path('/files/photos/'), $filename);
             $reg->photo = $photo_path1;
         }
         $cnicF_path1 = null;
@@ -344,8 +340,7 @@ class RegistrationController extends Controller
             $filename = $rand.".".$image1->getClientOriginalExtension();
             $image_path = public_path('/files/cnicF/'.$filename);
             $cnicF_path1 = '/files/cnicF/'.$filename;
-            $img = Image::make($image1);
-            $img->save($image_path,100);
+            $image1->move(public_path('/files/cnicF/'), $filename);
             $reg->cnicF = $cnicF_path1;
         }
         $cnicB_path1 = null;
@@ -358,8 +353,7 @@ class RegistrationController extends Controller
             $filename = $rand.".".$image2->getClientOriginalExtension();
             $image_path = public_path('/files/cnicB/'.$filename);
             $cnicB_path1 = '/files/cnicB/'.$filename;
-            $img = Image::make($image2);
-            $img->save($image_path,100);
+            $image2->move(public_path('/files/cnicB/'), $filename);
             $reg->cnicB = $cnicB_path1;
         }
         $bCard_path1 = null;
@@ -372,8 +366,7 @@ class RegistrationController extends Controller
             $filename = $rand.".".$image3->getClientOriginalExtension();
             $image_path = public_path('/files/bCard/'.$filename);
             $bCard_path1 = '/files/bCard/'.$filename;
-            $img = Image::make($image3);
-            $img->save($image_path,100);
+            $image3->move(public_path('/files/bCard/'), $filename);
             $reg->bCard = $bCard_path1;
         }
         $bCardB_path1 = null;
@@ -387,8 +380,7 @@ class RegistrationController extends Controller
             $filename = $rand.".".$image4->getClientOriginalExtension();
             $image_path = public_path('/files/bCardB/'.$filename);
             $bCardB_path1 = '/files/bCardB/'.$filename;
-            $img = Image::make($image4);
-            $img->save($image_path,100);
+            $image4->move(public_path('/files/bCardB/'), $filename);
             $reg->bCardB = $bCardB_path1;
         }
         /* $license_path1 = null; */
