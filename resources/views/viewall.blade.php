@@ -70,6 +70,11 @@
                                     @endforeach
                                     
                                 </div>
+                                <div class="row mt-4">
+                                    <div class="col-12">
+                                        {{$regs->links()}}
+                                    </div>
+                                </div>
                                
                                </div>
                             </div>

@@ -524,7 +524,7 @@ class RegistrationController extends Controller
 
     public function viewall()
     {
-        $regs = registration::where('status', 'Approved')->get();
+        $regs = registration::where('status', 'Approved')->paginate(8);
 
         return view('viewall', compact('regs'));
     }
