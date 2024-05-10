@@ -521,4 +521,11 @@ class RegistrationController extends Controller
         }
         return redirect("/")->with('msg', "Registration form submitted for approval");
     }
+
+    public function viewall()
+    {
+        $regs = registration::where('status', 'Approved')->get();
+
+        return view('viewall', compact('regs'));
+    }
 }

@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [RegistrationController::class, 'tracking']);
+Route::get('/viewall', [RegistrationController::class, 'viewall']);
 Route::get('/registration/create', [RegistrationController::class, 'registration']);
 Route::post('/registration/store', [RegistrationController::class, 'store']);
 Route::post('/registration/update', [RegistrationController::class, 'update']);
