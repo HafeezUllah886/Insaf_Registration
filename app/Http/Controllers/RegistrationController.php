@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Image;
+use Carbon\Carbon;
 class RegistrationController extends Controller
 {
     public function registration(){
@@ -20,12 +21,13 @@ class RegistrationController extends Controller
         $req->validate(
             [
                 'photo' => 'required|image|mimes:jpeg,jpg,png|max:3072',
-                'cnicF' => 'required|image|mimes:jpeg,jpg,png|max:3072',
-                'cnicB' => 'required|image|mimes:jpeg,jpg,png|max:3072',
+                'cnicF' => 'image|mimes:jpeg,jpg,png|max:3072',
+                'cnicB' => 'image|mimes:jpeg,jpg,png|max:3072',
                 'bCard' => 'image|mimes:jpeg,jpg,png|max:3072',
                 'bCardB' => 'image|mimes:jpeg,jpg,png|max:3072',
             ]
             );
+           
         $check = registration::where("cnic", $req->cnic)->count();
         if($check > 0)
         {
@@ -77,6 +79,35 @@ class RegistrationController extends Controller
             $image->move(public_path('/files/bCardB/'), $filename);
         }
         $license_path1 = null;
+    
+        $dob = $req->input('dob'); 
+        $lc = $req->input('lc'); 
+        $hc = $req->input('hc'); 
+        $sc = $req->input('sc'); 
+        $since = $req->input('since'); 
+        
+       
+        if($dob)
+        {
+            $dob = Carbon::createFromFormat('d-m-Y', $dob)->format('Y-m-d');
+        }
+        if($lc)
+        {
+            $lc = Carbon::createFromFormat('d-m-Y', $lc)->format('Y-m-d');
+        }
+         if($hc)
+        {
+            $hc = Carbon::createFromFormat('d-m-Y', $hc)->format('Y-m-d');
+        }
+        if($sc)
+        {
+            $sc = Carbon::createFromFormat('d-m-Y', $sc)->format('Y-m-d');
+        }
+        if($since)
+        {
+            $since = Carbon::createFromFormat('d-m-Y', $since)->format('Y-m-d');
+        }
+       
         $reg = registration::create(
             [
                 'name' => $req->name,
@@ -85,11 +116,11 @@ class RegistrationController extends Controller
                 'cnic' => $req->cnic,
                 'gender' => $req->gender,
                 'dist' => $req->dist,
-                'dob' => $req->dob,
-                'lc' => $req->lc,
-                'hc' => $req->hc,
-                'sc' => $req->sc,
-                'since' => $req->since,
+                'dob' => $dob,
+                'lc' => $lc,
+                'hc' => $hc,
+                'sc' => $sc,
+                'since' => $since,
                 'barReg' => $req->barReg,
                 'phone' => $req->phone,
                 'email' => $req->email,
@@ -152,6 +183,28 @@ class RegistrationController extends Controller
         return view('tracking');
     }
 
+    public function changePassword(request $req)
+    {
+        $reg = registration::find($req->id);
+        $password = hash::check($req->oldpassword, $reg->password);
+
+        if($password)
+        {
+            if($req->newpassword == $req->confirmpassword)
+            {
+                $reg->password = hash::make($req->newpassword);
+                $reg->save();
+                
+                return back()->with('msg', "Password Changed");
+            }
+
+            return back()->with('error', 'New Password and Confirm Password are different');
+
+        }
+
+        return back()->with('error', 'Invalid Old Password');
+    }
+
     public function trackingSearch($cnic)
     {
        $reg = registration::where("cnic", $cnic)->first();
@@ -206,18 +259,34 @@ class RegistrationController extends Controller
                         $data .= '<h6>Notes</h6>';
                         $data .= '<p>'.$notes.'</p>';
                     $data .= '</div>';
-                    if($status == "Rejected")
+                    $data .= '<div class="col-md-3">';
+                        $data .= '<h6>Profile completion</h6>';
+                        $data .= '<p>'.calculateProfileCompletion($cnic).'</p>';
+                    $data .= '</div>';
+                    if($status != "Approved")
                     {
                         $data .= '<div class="col-md-2">';
                         $data .= '<button id="edit" class="btn btn-primary" onclick="confirmPassowrd('.$reg->id.')" >Edit Form</button>';
                         $data .= '</div>';
                     }
+                    $data .= '<div class="col-md-4">';
+                        $data .= '<button id="changePasswordBtn" class="btn btn-warning" onclick="changePassword('.$reg->id.')" >Change Password</button>';
+                        $data .= '</div>';
+                $data .= '</div>';
                 $data .= '</div>';
             $data .= '</div>';
         $data .= '</div>';
 
        }
        return $data;
+    }
+
+    public function adminChangePassword(request $req)
+    {
+        $reg = registration::find($req->id);
+        $reg->password = hash::make($req->password);
+        $reg->save();
+        return back()->with('msg', "Password Changed");
     }
 
     public function delete($id)
@@ -269,17 +338,24 @@ class RegistrationController extends Controller
         return redirect('/dashboard')->with("msg", "Registration Re-approved and moved to approved list");
     }
 
-    public function verifyPassword(request $req)
+    public function verifyPassword(request $req, $admin = false)
     {
         $reg = registration::find($req->id);
         $password = hash::check($req->password, $reg->password);
 
         if($password)
         {
-            return view('edit', compact('reg'));
+            return view('edit', compact('reg', 'admin'));
         }
 
         return back()->with('error', 'Invalid Password');
+    }
+
+    public function adminEdit($id, $admin)
+    {
+        $reg = registration::find($id);
+
+        return view('edit', compact('reg', 'admin'));
     }
 
     public function update(request $req)
@@ -298,6 +374,32 @@ class RegistrationController extends Controller
         {
             return back()->with('error', "Application against this cnic aleardy exists");
         }
+
+        $dob = $req->input('dob'); 
+        $lc = $req->input('lc'); 
+        $hc = $req->input('hc'); 
+        $sc = $req->input('sc'); 
+        $since = $req->input('since'); 
+        if($dob)
+        {
+            $dob = Carbon::createFromFormat('d-m-Y', $dob)->format('Y-m-d');
+        }
+        if($lc)
+        {
+            $lc = Carbon::createFromFormat('d-m-Y', $lc)->format('Y-m-d');
+        }
+         if($hc)
+        {
+            $hc = Carbon::createFromFormat('d-m-Y', $hc)->format('Y-m-d');
+        }
+        if($sc)
+        {
+            $sc = Carbon::createFromFormat('d-m-Y', $sc)->format('Y-m-d');
+        }
+        if($since)
+        {
+            $since = Carbon::createFromFormat('d-m-Y', $since)->format('Y-m-d');
+        }
         $reg = registration::find($req->id);
         $reg->name = $req->name;
         $reg->fname = $req->fname;
@@ -305,11 +407,11 @@ class RegistrationController extends Controller
         $reg->cnic = $req->cnic;
         $reg->gender = $req->gender;
         $reg->dist = $req->dist;
-        $reg->dob = $req->dob;
-        $reg->lc = $req->lc;
-        $reg->hc = $req->hc;
-        $reg->sc = $req->sc;
-        $reg->since = $req->since;
+        $reg->dob = $dob;
+        $reg->lc = $lc;
+        $reg->hc = $hc;
+        $reg->sc = $sc;
+        $reg->since = $since;
         $reg->barReg = $req->barReg;
         $reg->phone = $req->phone;
         $reg->email = $req->email;
@@ -413,7 +515,10 @@ class RegistrationController extends Controller
                 'notes' => "Resubmitted",
             ]
         );
-
+        if($req->redirect == true)
+        {
+            return redirect("/registration/view/$reg->id")->with('msg', "Data Updated");
+        }
         return redirect("/")->with('msg', "Registration form submitted for approval");
     }
 }

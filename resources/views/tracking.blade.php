@@ -127,6 +127,38 @@
     </div>
   </div>
 
+  <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+        </div>
+        <form action="{{url("/registeration/changePassword/")}}" method="post">
+        <div class="modal-body">
+            @csrf
+            <input type="hidden" name="id" id="form-id1">
+            <div class="form-group">
+                <label for="password">Old Password</label>
+                <input type="password" name="oldpassword" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">New Password</label>
+                <input type="password" name="newpassword" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Confirm Password</label>
+                <input type="password" name="confirmpassword" required class="form-control">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Change Password</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="{{ asset('assets/src/plugins/src/jquery-ui/jquery.min.js') }}"></script>
     <script src="{{asset('assets/src/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -174,6 +206,11 @@
     {
         $("#form-id").val(id);
         $("#exampleModal").modal('show');
+    }
+    function changePassword(id)
+    {
+        $("#form-id1").val(id);
+        $("#changePasswordModal").modal('show');
     }
 </script>
 </body>

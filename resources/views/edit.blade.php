@@ -59,6 +59,7 @@
                                 <form action="{{url('/registration/update')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$reg->id}}">
+                                    <input type="hidden" name="redirect" value="{{$admin}}">
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -88,7 +89,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="cnic">CNIC Number (Without Dashes)</label>
-                                                <input type="text" class="form-control" required maxlength="13" value="{{$reg->cnic}}" id="cnic" name="cnic">
+                                                <input type="text" class="form-control" readonly required maxlength="13" value="{{$reg->cnic}}" id="cnic" name="cnic">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -105,13 +106,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="dist">District</label>
-                                                <input type="text" class="form-control" value="{{$reg->dist}}" required id="dist" name="dist">
+                                                <input type="text" class="form-control" value="{{$reg->dist}}" id="dist" name="dist">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="dob">Date of Birth</label>
-                                                <input type="date" class="form-control" value="{{date("Y-m-d", strtotime($reg->dob))}}" required id="dob" name="dob">
+                                                <input type="text" class="form-control date" value="{{date("d-m-Y", strtotime($reg->dob))}}" id="dob" name="dob">
                                             </div>
                                         </div>
                                     </div>
@@ -122,19 +123,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="lc">L.C</label>
-                                                <input type="date" class="form-control" value="{{date("Y-m-d", strtotime($reg->lc))}}" required id="lc" name="lc">
+                                                <input type="text" class="form-control date" value="{{date("d-m-Y", strtotime($reg->lc))}}" id="lc" name="lc">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="hc">H.C</label>
-                                                <input type="date" class="form-control" value="{{date("Y-m-d", strtotime($reg->hc))}}" id="hc" name="hc">
+                                                <input type="text" class="form-control date" value="{{date("d-m-Y", strtotime($reg->hc))}}" id="hc" name="hc">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="sc">S.C</label>
-                                                <input type="date" class="form-control" value="{{date("Y-m-d", strtotime($reg->sc))}}" id="sc" name="sc">
+                                                <input type="text" class="form-control date" value="{{date("d-m-Y", strtotime($reg->sc))}}" id="sc" name="sc">
                                             </div>
                                         </div>
                                     </div>
@@ -142,19 +143,19 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="barReg">Bar Registration Number</label>
-                                                <input type="text" class="form-control" value="{{$reg->barReg}}" required id="barReg" name="barReg">
+                                                <input type="text" class="form-control" value="{{$reg->barReg}}" id="barReg" name="barReg">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="since">Since Member of ILF</label>
-                                                <input type="date" class="form-control" value="{{date("Y-m-d", strtotime($reg->since))}}" id="since" name="since">
+                                                <input type="text" class="form-control date" value="{{date("d-m-Y", strtotime($reg->since))}}" id="since" name="since">
                                             </div>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <div class="form-group">
                                                 <label for="phone">Phone Number</label>
-                                                <input type="text" class="form-control" value="{{$reg->phone}}" required id="phone" name="phone">
+                                                <input type="text" class="form-control" value="{{$reg->phone}}" id="phone" name="phone">
                                             </div>
                                         </div>
                                         <div class="col-md-6 mt-2">
@@ -166,7 +167,7 @@
                                         <div class="col-md-6 mt-2">
                                             <div class="form-group">
                                                 <label for="addr">Office Address</label>
-                                                <input type="text" class="form-control" value="{{$reg->addr}}" required id="addr" name="addr">
+                                                <input type="text" class="form-control" value="{{$reg->addr}}" id="addr" name="addr">
                                             </div>
                                         </div>
                                        {{--  <div class="col-md-6 mt-2">
@@ -288,7 +289,15 @@
     <script src="{{ asset('assets/src/plugins/src/input-mask/jquery.inputmask.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/src/plugins/src/input-mask/input-mask.js') }}"></script>
     <script>
+             var maskConfig = {
+    leapday: "29-02-",
+    separator: "-",
+    alias: "dd-mm-yyyy",
+    placeholder: "DD-MM-YYYY",
+    clearIncomplete: true
+};
             $('#cnic').inputmask("9999999999999",{ "clearIncomplete": true });
+            $(".date").inputmask("99-99-9999",maskConfig);
     </script>
 
     <!-- END GLOBAL MANDATORY SCRIPTS -->

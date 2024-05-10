@@ -104,13 +104,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="dist">District</label>
-                                                <input type="text" class="form-control" required id="dist" name="dist">
+                                                <input type="text" class="form-control" id="dist" name="dist">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="dob">Date of Birth</label>
-                                                <input type="date" class="form-control" required id="dob" name="dob">
+                                                <input type="text" class="form-control date" id="dob" name="dob">
                                             </div>
                                         </div>
                                     </div>
@@ -120,20 +120,20 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="lc">L.C</label>
-                                                <input type="date" class="form-control" required id="lc" name="lc">
+                                                <label for="lc">L.C </label>
+                                                <input type="text" class="form-control date" id="lc" name="lc">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="hc">H.C <i class="text-info">Optional</i></label>
-                                                <input type="date" class="form-control" id="hc" name="hc">
+                                                <label for="hc">H.C<i class="text-info">Optional</i></label>
+                                                <input type="text" class="form-control date" id="hc" name="hc">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="sc">S.C <i class="text-info">Optional</i></label>
-                                                <input type="date" class="form-control" id="sc" name="sc">
+                                                <label for="sc">S.C<i class="text-info">Optional</i></label>
+                                                <input type="text" class="form-control date" id="sc" name="sc">
                                             </div>
                                         </div>
                                     </div>
@@ -141,19 +141,19 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="barReg">Bar Registration Number</label>
-                                                <input type="text" class="form-control" required id="barReg" name="barReg">
+                                                <input type="text" class="form-control" id="barReg" name="barReg">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="since">Since Member of ILF</label>
-                                                <input type="date" class="form-control" id="since" name="since">
+                                                <input type="text" class="form-control date" id="since" name="since">
                                             </div>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <div class="form-group">
                                                 <label for="phone">Phone Number</label>
-                                                <input type="text" class="form-control" required id="phone" name="phone">
+                                                <input type="text" class="form-control" id="phone" name="phone">
                                             </div>
                                         </div>
                                         <div class="col-md-6 mt-2">
@@ -165,7 +165,7 @@
                                         <div class="col-md-6 mt-2">
                                             <div class="form-group">
                                                 <label for="addr">Office Address</label>
-                                                <input type="text" class="form-control" required id="addr" name="addr">
+                                                <input type="text" class="form-control" id="addr" name="addr">
                                             </div>
                                         </div>
                                         <div class="col-md-6 mt-2">
@@ -194,7 +194,7 @@
                                         <div class="col-md-4 mt-2">
                                             <div class="form-group">
                                                 <label for="cnicF">CNIC Front</label>
-                                                <input type="file" id="cnicF" required name="cnicF" class="form-control" accept="image/*">
+                                                <input type="file" id="cnicF" name="cnicF" class="form-control" accept="image/*">
                                                 @error('cnicF')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -209,7 +209,7 @@
                                         <div class="col-md-4 mt-2">
                                             <div class="form-group">
                                                 <label for="cnicB">CNIC Back</label>
-                                                <input type="file" id="cnicB" required name="cnicB" class="form-control" accept="image/*">
+                                                <input type="file" id="cnicB" name="cnicB" class="form-control" accept="image/*">
                                                 @error('cnicB')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -313,7 +313,15 @@
     <script src="{{ asset('assets/src/plugins/src/input-mask/jquery.inputmask.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/src/plugins/src/input-mask/input-mask.js') }}"></script>
     <script>
+        var maskConfig = {
+    leapday: "29-02-",
+    separator: "-",
+    alias: "dd-mm-yyyy",
+    placeholder: "DD-MM-YYYY",
+    clearIncomplete: true
+};
             $('#cnic').inputmask("9999999999999",{ "clearIncomplete": true });
+            $(".date").inputmask("99-99-9999",maskConfig);
     </script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 

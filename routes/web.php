@@ -37,6 +37,7 @@ Route::post('/registration/store', [RegistrationController::class, 'store']);
 Route::post('/registration/update', [RegistrationController::class, 'update']);
 Route::get('/registeration/track/search/{cnic}', [RegistrationController::class, 'trackingSearch']);
 Route::post('/registeration/edit/', [RegistrationController::class, 'verifyPassword']);
+Route::post('/registeration/changePassword/', [RegistrationController::class, 'changePassword']);
 Route::get('/admin', [authController::class, 'signin'])->name('login');
 Route::post('/admin', [authController::class, 'attempt_signin']);
 Route::get('/test', [settingsController::class, 'test']);
@@ -77,17 +78,19 @@ Route::middleware('auth')->group(function (){
     Route::get('/role/edit/{id}', [rolesController::class, 'edit']);
     Route::post('/role/update/{id}', [rolesController::class, 'update']);
     Route::post('/role/assignPermissions/{id}', [rolesController::class, 'assignPermissions']);
-    Route::get('/reset', function() {
+    /* Route::get('/reset', function() {
         Artisan::call('migrate:fresh --seed');
 
         return redirect('/dashboard')->with('msg', 'Reset Successful');
-    });
+    }); */
 
     Route::get('/registraions/list/{type}', [RegistrationController::class, 'list']);
+    Route::get('/registraions/edit/{id}/{admin}', [RegistrationController::class, 'adminEdit']);
     Route::get('/registration/view/{id}', [RegistrationController::class, 'view']);
     Route::get('/registration/delete/{id}', [RegistrationController::class, 'delete']);
     Route::get('/registration/reApprove/{id}', [RegistrationController::class, 'reApprove']);
     Route::post('/registraion/status', [RegistrationController::class, 'changeStatus']);
+    Route::post('/registeration/admin/changepassword', [RegistrationController::class, 'adminChangePassword']);
     Route::post('/app/forwarding/', [TrackingController::class, 'forwarding']);
     Route::post('/app/finalize', [TrackingController::class, 'finalize']);
     Route::post('/app/suspend', [TrackingController::class, 'suspend']);

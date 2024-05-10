@@ -10,6 +10,10 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/src/plugins/css/dark/table/datatable/dt-global_style.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('assets/src/plugins/src/glightbox/glightbox.min.css')}}">
 
+
+<link rel="stylesheet" href="{{asset('assets/src/assets/css/dark/components/modal.css')}}">
+<link rel="stylesheet" href="{{asset('assets/src/assets/css/light/components/modal.css')}}">
+
 @endpush
 
 @extends('layout.main')
@@ -104,8 +108,8 @@
                         <div class="d-flex justify-content-end">
                             <a href="{{ url('/dashboard') }}" class="btn btn-dark" style="margin-left: 5px">Dashboard</a>
                             <a href="{{ url('/registration/delete/') }}/{{ $reg->id }}" class="btn btn-danger" onclick="return confirm('Are you sure to delete this registration');" style="margin-left: 5px">Delete</a>
-
-
+                            <a href="{{ url('/registraions/edit/') }}/{{ $reg->id }}/true" class="btn btn-info" style="margin-left: 5px">Edit</a>
+                            <button class="btn btn-warning" style="margin-left: 5px" onclick="changePassword()" >Change Password</button>
                         </div>
                     </div>
                 </div>
@@ -215,6 +219,30 @@
     </div>
 </div>
 
+<div class="modal fade" id="changepassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Password</h5>
+        </div>
+        <form action="{{url("/registeration/admin/changepassword")}}" method="post">
+        <div class="modal-body">
+            @csrf
+            <input type="hidden" name="id" value="{{$reg->id}}">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" required class="form-control">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Change</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 <!-- CONTENT AREA -->
 
 @endsection
@@ -243,5 +271,10 @@
         }
       });
     });
+
+    function changePassword()
+    {
+        $("#changepassword").modal('show');
+    }
 </script>
 
