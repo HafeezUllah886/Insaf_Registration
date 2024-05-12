@@ -110,7 +110,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="dob">Date of Birth</label>
-                                                <input type="text" class="form-control date" id="dob" name="dob">
+                                                <input type="text" class="form-control date" required id="dob" name="dob">
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@
                                         <div class="col-md-6 mt-2">
                                             <div class="form-group">
                                                 <label for="phone">Phone Number</label>
-                                                <input type="text" class="form-control" id="phone" name="phone">
+                                                <input type="text" required class="form-control" id="phone" name="phone">
                                             </div>
                                         </div>
                                         <div class="col-md-6 mt-2">
@@ -280,6 +280,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <a href="https://www.insaflawyersforum.pk" class="btn-link">Go To Site</a>
                                 </div>
 
                             </form>

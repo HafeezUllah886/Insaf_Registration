@@ -76,7 +76,6 @@
                                                 <button type="submit" class="btn btn-block btn-primary mt-2 w-100">Search</button>
                                         </form>
                                         <div class="text-center mt-3">
-
                                             <a href="https://www.insaflawyersforum.pk" class="btn btn-info">Go To Site</a>
                                          </div>
                                         </div>

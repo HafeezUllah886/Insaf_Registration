@@ -123,19 +123,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="lc">L.C</label>
-                                                <input type="text" class="form-control date" value="{{date("d-m-Y", strtotime($reg->lc))}}" id="lc" name="lc">
+                                                <input type="text" class="form-control date" value="{{$reg->lc == null ? "" : date("d-m-Y", strtotime($reg->lc))}}" id="lc" name="lc">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="hc">H.C</label>
-                                                <input type="text" class="form-control date" value="{{date("d-m-Y", strtotime($reg->hc))}}" id="hc" name="hc">
+                                                <input type="text" class="form-control date" value="{{$reg->hc == null ? "" : date("d-m-Y", strtotime($reg->hc))}}" id="hc" name="hc">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="sc">S.C</label>
-                                                <input type="text" class="form-control date" value="{{date("d-m-Y", strtotime($reg->sc))}}" id="sc" name="sc">
+                                                <input type="text" class="form-control date" value="{{$reg->sc == null ? "" : date("d-m-Y", strtotime($reg->sc))}}" id="sc" name="sc">
                                             </div>
                                         </div>
                                     </div>
@@ -149,7 +149,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="since">Since Member of ILF</label>
-                                                <input type="text" class="form-control date" value="{{date("d-m-Y", strtotime($reg->since))}}" id="since" name="since">
+                                                <input type="text" class="form-control date" value="{{$reg->since == null ? "" : date("d-m-Y", strtotime($reg->since))}}" id="since" name="since">
                                             </div>
                                         </div>
                                         <div class="col-md-6 mt-2">
