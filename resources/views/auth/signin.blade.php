@@ -57,8 +57,6 @@
 
                                 </div>
                                 <form action="{{url('/admin')}}" method="post">
-                                    @csrf
-
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label class="form-label">User Name</label>
